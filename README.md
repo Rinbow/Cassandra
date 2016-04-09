@@ -43,3 +43,8 @@ Cassandra的关键特性之一就是它的可扩展能力。这需要动态的�
 
 Cassandra使用replication来达到高可用性和耐久性。每个数据项都被复制到N台节点上。每个key被分配到一个coordinator节点。coordinator管理着它职责范围内的数据项的replication。除了本地存储它范围内的每个key，coordinator还复制这些key到环中的N-1个节点上。Cassandra提供了多种不同的replication策略，比如“Rack Unaware”，“Rack Aware”和“Datacenter Aware”。Cassandra使用Zookeeper来在众多节点中选出一个当作leader节点。集群中所有的节点都和leader节点通信，leader告诉这些节点他们复制的范围，leader也会维持节点间的平衡，保证没有一个节点负责超过N-1的范围。一个节点对那些范围负责的元数据是缓存在节点本地的，这种方式保证节点如果挂了的话，它恢复之后还可以知道自己负责哪些范围。
 
+### 5.3 Membership
+
+#### 5.1 故障检测
+
+故障检测是一种某个节点可以在本地判定另一台节点上线还是下线的机制。
