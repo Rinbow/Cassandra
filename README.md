@@ -1,4 +1,4 @@
-# Cassandra---A-Decentralized-Structured-Storage-System
+# Cassandra:A-Decentralized-Structured-Storage-System
 
 ## 摘要
 
@@ -34,3 +34,7 @@ Cassandra的API由以下三个简单的方法组成。
 ## 5. 系统架构
 
 需要在设计生产设置中操作的存储系统的架构是非常复杂的。除了实际的数据持久化组件以外，系统还需要有以下几个特性：可扩展，负载均衡问题的健壮的解决方案，membership和故障检测，故障恢复，复制同步，过载处理，状态转换，并发和job分配，请求编组，请求路径，系统检测和预警，配置管理。我们在这边文章中只关注Cassandra中用到的核心的分布式系统技术：partitioning,replication，membership,failure handling and scaling。所有这些模块同步工作来锤炼读写请求。对于写数据来说，系统发送请求给复制节点同时等待着复制节点返回的数据来确定写操作是否完成。对读数据来说，基于客户端需要的一致性保障，系统也会发送请求给最近的复制节点或者发送请求给所有的复制节点同时等待着它们的回复。
+
+### 5.1 Partitioning
+
+Cassandra的关键特性之一就是它的可扩展能力。这需要动态的分配数据到集群中各个节点上的能力。Cassandra使用consistent hashing在集群中分配数据，同时使用一种规则来保持哈希函数。
